@@ -1,39 +1,43 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
+import { useQuery } from '@tanstack/react-query';
+import api from '@/services/api';
+import StatsCard from '@/components/StatsCard';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import type { Category, Order, Product } from '@/types/commerce';
 
 const DashboardPage = () => {
-  const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { data: products = [], isLoading: productsLoading } = useQuery<Product[]>({
+    queryKey: ['products'],
+    queryFn: async () => (await api.get('/api/products')).data
+  });
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  const { data: categories = [], isLoading: categoriesLoading } = useQuery<Category[]>({
+    queryKey: ['categories'],
+    queryFn: async () => (await api.get('/api/categories')).data
+  });
+
+  const { data: orders = [], isLoading: ordersLoading } = useQuery<Order[]>({
+    queryKey: ['orders'],
+    queryFn: async () => (await api.get('/api/orders')).data
+  });
+
+  const isLoading = productsLoading || categoriesLoading || ordersLoading;
+  const revenue = orders.reduce((sum, order) => sum + Number(order.totalAmount), 0);
 
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-10 shadow-sm">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-semibold text-slate-900">Dashboard</h2>
-          <p className="mt-2 text-slate-600">Your authentication details.</p>
-        </div>
-        <button className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium" onClick={handleLogout}>Logout</button>
+    <div className="space-y-6">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold text-slate-900">Dashboard</h2>
+        <p className="mt-2 text-slate-600">A quick overview of your CloudMart business.</p>
       </div>
-      <div className="mt-8 grid gap-4 rounded-xl bg-slate-50 p-6 md:grid-cols-2">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Name</p>
-          <p className="mt-1 text-lg text-slate-900">{user?.firstName} {user?.lastName}</p>
+      {isLoading ? <LoadingSpinner /> : (
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <StatsCard title="Total Products" value={products.length} description="Products available in the catalog" />
+          <StatsCard title="Total Orders" value={orders.length} description="Completed and pending orders" />
+          <StatsCard title="Total Categories" value={categories.length} description="Curated product groups" />
+          <StatsCard title="Total Revenue" value={`$${revenue.toFixed(2)}`} description="Placeholder revenue summary" />
         </div>
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Email</p>
-          <p className="mt-1 text-lg text-slate-900">{user?.email}</p>
-        </div>
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Role</p>
-          <p className="mt-1 text-lg text-slate-900">{user?.role}</p>
-        </div>
-      </div>
-    </section>
+      )}
+    </div>
   );
 };
 

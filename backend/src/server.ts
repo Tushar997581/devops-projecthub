@@ -7,6 +7,10 @@ import healthRouter from './routes/healthRoute.js';
 import authRouter from './routes/authRoute.js';
 import projectRouter from './routes/projectRoute.js';
 import taskRouter from './routes/taskRoute.js';
+import categoryRouter from './routes/categoryRoute.js';
+import productRouter from './routes/productRoute.js';
+import cartRouter from './routes/cartRoute.js';
+import orderRouter from './routes/orderRoute.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { env } from './config/env.js';
 
@@ -24,6 +28,10 @@ app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/projects', projectRouter);
 app.use('/api/tasks', taskRouter);
+app.use('/api/categories', categoryRouter);
+app.use('/api/products', productRouter);
+app.use('/api/cart', cartRouter);
+app.use('/api/orders', orderRouter);
 
 app.use(errorHandler);
 
