@@ -8,14 +8,16 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
+  id        String    @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String    @unique
   password  String
+  role      UserRole  @default(USER)
   projects  Project[]
   tasks     Task[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Project {
@@ -40,4 +42,9 @@ model Task {
   assignee    User?    @relation(fields: [assigneeId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+enum UserRole {
+  ADMIN
+  USER
 }

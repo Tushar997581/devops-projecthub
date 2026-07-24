@@ -8,11 +8,12 @@ import authRouter from './routes/authRoute.js';
 import projectRouter from './routes/projectRoute.js';
 import taskRouter from './routes/taskRoute.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { env } from './config/env.js';
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = env.port;
 
 app.use(helmet());
 app.use(cors());
