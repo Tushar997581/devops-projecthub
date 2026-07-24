@@ -18,6 +18,13 @@ dotenv.config();
 
 const app = express();
 const port = env.port;
+app.get("/health", (_req, res) => {
+  res.status(200).json({
+    status: "ok",
+    service: "backend",
+    timestamp: new Date().toISOString(),
+  });
+});
 
 app.use(helmet());
 app.use(cors());
