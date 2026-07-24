@@ -3,7 +3,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = "CloudMart"
+      Project     = var.project_name
       Environment = var.environment
       ManagedBy   = "Terraform"
     }

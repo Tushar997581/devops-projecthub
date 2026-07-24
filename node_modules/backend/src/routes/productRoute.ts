@@ -1,0 +1,13 @@
+import { Router } from 'express';
+import { productController } from '../controllers/productController.js';
+import { authMiddleware } from '../middleware/authMiddleware.js';
+
+const router = Router();
+
+router.get('/', authMiddleware, productController.list);
+router.get('/:id', authMiddleware, productController.getById);
+router.post('/', authMiddleware, productController.create);
+router.put('/:id', authMiddleware, productController.update);
+router.delete('/:id', authMiddleware, productController.remove);
+
+export default router;
