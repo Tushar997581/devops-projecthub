@@ -7,9 +7,9 @@
 <p align="center">
 A production-inspired DevOps project using AWS, Terraform, Docker, Kubernetes, GitHub Actions, and Monitoring.
 </p>
-# 🚀 DevOps ProjectHub – CloudMart Deployment
+ 🚀 DevOps ProjectHub – CloudMart Deployment
 
-> A production-inspired DevOps project demonstrating the deployment of a containerized full-stack e-commerce application on AWS using Terraform, Docker, Kubernetes (Amazon EKS), GitHub Actions, and modern monitoring tools.
+ A production-inspired DevOps project demonstrating the deployment of a containerized full-stack e-commerce application on AWS using Terraform, Docker, Kubernetes (Amazon EKS), GitHub Actions, and modern monitoring tools.
 
 ---
 

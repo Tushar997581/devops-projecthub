@@ -67,7 +67,7 @@ resource "aws_security_group" "eks_nodes" {
     from_port   = 0
     to_port     = 65535
     protocol    = "-1"
-    self         = true
+    self        = true
   }
 
   egress {
@@ -92,10 +92,10 @@ resource "aws_security_group" "rds" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description     = "PostgreSQL"
-    from_port       = 5432
-    to_port         = 5432
-    protocol        = "tcp"
+    description = "PostgreSQL"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
     security_groups = [
       aws_security_group.eks_nodes.id
     ]
