@@ -1,0 +1,11 @@
+- [ ] Terraform Validate
+- [ ] Terraform Plan
+- [ ] Terraform Apply
+- [ ] EKS Cluster Running
+- [ ] Configure kubectl
+- [ ] Deploy Backend
+- [ ] Deploy Frontend
+- [ ] Configure Ingress
+- [ ] Verify RDS Connection
+- [ ] Verify CI/CD
+- [ ] Verify Monitoring
