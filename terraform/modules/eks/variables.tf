@@ -41,7 +41,7 @@ variable "eks_node_role_arn" {
 
 variable "instance_types" {
   type    = list(string)
-  default = ["t3.medium"]
+  default = ["t3.micro"]
 }
 
 variable "desired_size" {

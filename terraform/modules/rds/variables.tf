@@ -31,7 +31,7 @@ variable "db_password" {
 
 variable "instance_class" {
   type    = string
-  default = "db.t4g.micro"
+  default = "db.t3.micro"
 }
 
 variable "allocated_storage" {
